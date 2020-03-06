@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 20:06:41 by miguel            #+#    #+#             */
-/*   Updated: 2020/01/10 01:17:41 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/06 19:06:19 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void delete_raqueta1(pong *var)
 		i = var->posjugy1;
 		while (i < var->posfinaljugy1)
 		{
-			var->campo[var->posfinaljugx1 - var->modR1 - 1][i] = ' ';
+			mvwprintw(win, var->posfinaljugx1 - var->modR1 - 1, i, " ");
 			i++;
 		}
 	}
@@ -30,7 +30,8 @@ void delete_raqueta1(pong *var)
 		i = var->posjugy1;
 		while (i < var->posfinaljugy1)
 		{
-			var->campo[var->posjugx1 - var->modR1][i] = ' ';
+			mvwprintw(win, var->posjugx1 - var->modR1, i, " ");
+			//var->campo[var->posjugx1 - var->modR1][i] = ' ';
 			i++;
 		}
 	}
@@ -45,7 +46,8 @@ void delete_raqueta2(pong *var)
 		i = var->posjugy2;
 		while (i < var->posfinaljugy2)
 		{
-			var->campo[var->posfinaljugx2 - var->modR2 - 1][i] = ' ';
+			mvwprintw(win, var->posfinaljugx2 - var->modR2 - 1, i, " ");
+			//var->campo[var->posfinaljugx2 - var->modR2 - 1][i] = ' ';
 			i++;
 		}
 	}
@@ -54,7 +56,8 @@ void delete_raqueta2(pong *var)
 		i = var->posjugy2;
 		while (i < var->posfinaljugy2)
 		{
-			var->campo[var->posjugx2 - var->modR2][i] = ' ';
+			mvwprintw(win, var->posjugx2 - var->modR2, i, " ");
+			//	var->campo[var->posjugx2 - var->modR2][i] = ' ';
 			i++;
 		}
 	}
@@ -91,56 +94,60 @@ void limits(pong *var)
 
 void update(pong *var)
 {
-	char key;
+	int key1;
+	int key2;
 	//Pelota
 	var->pelx += var->modX;
 	var->pely += var->modY;
-	fill_pelota(var);
-	var->campo[var->pelx - var->modX][var->pely - var->modY] = ' ';
+	mvwprintw(win, var->pelx - var->modX, var->pely - var->modY, " ");
 
-	//Raqueta del jugador 1
-	if (1)
+	if (!cbreak())
 	{
-		key = getchar();
-		if (key == 'w' && var->limit_raq1 != 1)
-			var->modR1 = -1;
-		else if (key == 's' && var->limit_raq1 != -1)
-			var->modR1 = 1;
-		else
-			var->modR1 = 0;
-	}
-	var->posjugx1 += var->modR1;
-	var->posfinaljugx1 += var->modR1;
-	fill_raqueta1(var);
-	delete_raqueta1(var);
 
-	//Raqueta Jugador 2
-
-	if (1)
-	{
-		key = getchar();
-		if (key == 'o' && var->limit_raq2 != 1)
-			var->modR2 = -1;
-		else if (key == 'l' && var->limit_raq2 != -1)
-			var->modR2 = 1;
-		else
-			var->modR2 = 0;
+		//Raqueta del jugador 1
+		if (key1 = getch())
+		{
+			if (key1 == 'w' && var->limit_raq1 != 1)
+				var->modR1 = -1;
+			else if (key1 == 's' && var->limit_raq1 != -1)
+				var->modR1 = 1;
+			else
+				var->modR1 = 0;
+		}
+		var->posjugx1 += var->modR1;
+		var->posfinaljugx1 += var->modR1;
+		//fill_raqueta1(var);
+		delete_raqueta1(var);
 	}
-	var->posjugx2 += var->modR2;
-	var->posfinaljugx2 += var->modR2;
-	fill_raqueta2(var);
-	delete_raqueta2(var);
-}
+		//Raqueta Jugador 2
+			if (!cbreak())
+		{
+			if (key2 = getch())
+			{
+				if (key2 == 'o' && var->limit_raq2 != 1)
+					var->modR2 = -1;
+				else if (key2 == 'l' && var->limit_raq2 != -1)
+					var->modR2 = 1;
+				else
+					var->modR2 = 0;
+			}
+			var->posjugx2 += var->modR2;
+			var->posfinaljugx2 += var->modR2;
+			//fill_raqueta2(var);
+			delete_raqueta2(var);
+		}
+	}
+
 
 void gameloop(pong *var)
 {
 	var->gol = 0;
 	while (!var->gol)
 	{
-		system("clear");
-		print_campo(var);
+		//wclear(win);
 		limits(var);
 		update(var);
+		print_game(var);
 		usleep(50000);
 	}
 }

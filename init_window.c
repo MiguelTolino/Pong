@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_campo.c                                      :+:      :+:    :+:   */
+/*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/04 19:15:12 by miguel            #+#    #+#             */
-/*   Updated: 2020/01/04 19:20:13 by miguel           ###   ########.fr       */
+/*   Created: 2020/03/06 17:48:25 by miguel            #+#    #+#             */
+/*   Updated: 2020/03/06 19:33:47 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pong.h"
 
-void print_campo(pong *var)
+int init_window()
 {
-    int i = 0;
-    int j;
-    while (i < V)
-    {
-        j = 0;
-        while (j < H)
-        {
-            printf("%c", var->campo[i][j]);
-            j++;
-        }
-        printf("\n");
-        i++;
-    }
+    initscr();
+    noecho();
+    nodelay(win,TRUE);
+    clear();
+    win = newwin(V, H, 10, 10);
+    keypad(stdscr, TRUE);
+    refresh();
+    return (1);
 }

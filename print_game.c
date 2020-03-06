@@ -1,41 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_campo.c                                       :+:      :+:    :+:   */
+/*   print_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 19:13:01 by miguel            #+#    #+#             */
-/*   Updated: 2020/01/10 00:56:45 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/06 18:16:18 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pong.h"
 
-void fill_campo(pong *var)
-{
-    int i;
-    int j;
-
-    i = 0;
-    while (i < V)
-    {
-        j = 0;
-        while (j < H)
-        {
-            if (i == 0 || i == V - 1)
-                var->campo[i][j] = '-';
-            else if (j == 0 || j == H - 1)
-                var->campo[i][j] = '|';
-            else
-                var->campo[i][j] = ' ';
-            j++;
-        }
-        i++;
-    }
-}
-
-void fill_raqueta1(pong *var)
+void print_raqueta1(pong *var)
 {
     int i;
     int j;
@@ -46,14 +23,15 @@ void fill_raqueta1(pong *var)
         j = var->posjugy1;
         while (j < var->posfinaljugy1)
         {
-            var->campo[i][j] = 'X';
+            mvwprintw(win, i, j, "%c", 'X');
             j++;
         }
         i++;
     }
+    wrefresh(win);
 }
 
-void fill_raqueta2(pong *var)
+void print_raqueta2(pong *var)
 {
     int i;
     int j;
@@ -65,22 +43,25 @@ void fill_raqueta2(pong *var)
         j = var->posjugy2;
         while (j < var->posfinaljugy2)
         {
-            var->campo[i][j] = 'X';
+            mvwprintw(win, i, j, "%c", 'X');
             j++;
         }
         i++;
     }
+    wrefresh(win);
 }
 
-void fill_pelota(pong *var)
+void print_pelota(pong *var)
 {
-    var->campo[var->pelx][var->pely] = 'O';
+    mvwprintw(win, var->pelx, var->pely, "%c", 'O');
+    wrefresh(win);
 }
 
-void fill_game(pong *var)
+void print_game(pong *var)
 {
-    fill_campo(var);
-    fill_pelota(var);
-    fill_raqueta1(var);
-    fill_raqueta2(var);
+    box(win, ACS_VLINE,ACS_HLINE);
+    print_pelota(var);
+    print_raqueta1(var);
+    print_raqueta2(var);
+    wrefresh(win);
 }

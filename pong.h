@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 19:14:42 by miguel            #+#    #+#             */
-/*   Updated: 2020/01/10 01:13:35 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/06 18:17:12 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <time.h>
 #define V 20
 #define H 80
+
+WINDOW *win;
 
 typedef struct pong
 {
@@ -34,18 +36,8 @@ typedef struct pong
     int gol;
 } pong;
 
-void fill_campo(pong *var);
-void fill_raqueta1(pong *var);
-void fill_raqueta2(pong *var);
-void fill_pelota(pong *var);
-void print_campo(pong *var);
-void limits(pong *var);
-void update(pong *var);
+int init_window();
 void gameloop(pong *var);
-void fill_game(pong *var);
-void delete_raqueta(pong *var);
-int  kbhit(void);
-
-
+void print_game(pong *var);
 
 #endif

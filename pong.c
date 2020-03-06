@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 19:09:15 by miguel            #+#    #+#             */
-/*   Updated: 2020/01/09 23:56:53 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/06 18:15:52 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int main()
     var.modX = -1;
     var.modY = -1;
 
-    //initscr();
-    fill_game(&var);
+    init_window();
+    print_game(&var);
     gameloop(&var);
+    getch();
+    endwin();
     return (0);
 }

@@ -1,6 +1,7 @@
 CC = gcc
 CFLAGS = -g -o 
+CURSES = -lncurses
 NAME = pong
-FILES = fill_campo.c pong.c print_campo.c gameloop.c 
+FILES = print_game.c pong.c init_window.c gameloop.c 
 main:
-	$(CC) $(FILES) $(CFLAGS) $(NAME)
+	$(CC) $(FILES) $(CURSES) $(CFLAGS) $(NAME)
