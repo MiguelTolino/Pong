@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 19:13:01 by miguel            #+#    #+#             */
-/*   Updated: 2020/03/06 18:16:18 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/07 21:01:58 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ void print_raqueta1(pong *var)
         j = var->posjugy1;
         while (j < var->posfinaljugy1)
         {
-            mvwprintw(win, i, j, "%c", 'X');
+            wattron(win,A_REVERSE);
+            mvwprintw(win, i, j, "%c", ' ');
+            wattroff(win,A_REVERSE);
             j++;
         }
         i++;
     }
-    wrefresh(win);
 }
 
 void print_raqueta2(pong *var)
@@ -43,12 +44,13 @@ void print_raqueta2(pong *var)
         j = var->posjugy2;
         while (j < var->posfinaljugy2)
         {
-            mvwprintw(win, i, j, "%c", 'X');
+            wattron(win,A_REVERSE);
+            mvwprintw(win, i, j, "%c", ' ');
+            wattroff(win,A_REVERSE);
             j++;
         }
         i++;
     }
-    wrefresh(win);
 }
 
 void print_pelota(pong *var)
@@ -59,6 +61,7 @@ void print_pelota(pong *var)
 
 void print_game(pong *var)
 {
+	mvwprintw(stdscr, 0,0, "PONG");
     box(win, ACS_VLINE,ACS_HLINE);
     print_pelota(var);
     print_raqueta1(var);

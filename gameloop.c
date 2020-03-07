@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 20:06:41 by miguel            #+#    #+#             */
-/*   Updated: 2020/03/06 19:06:19 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/07 20:57:42 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,50 +94,40 @@ void limits(pong *var)
 
 void update(pong *var)
 {
-	int key1;
-	int key2;
+	int key;
 	//Pelota
 	var->pelx += var->modX;
 	var->pely += var->modY;
 	mvwprintw(win, var->pelx - var->modX, var->pely - var->modY, " ");
 
-	if (!cbreak())
-	{
+	key = getch();
+	//Raqueta del jugador 1
+		if (key == 'w' && var->limit_raq1 != 1)
+			var->modR1 = -1;
+		else if (key == 's' && var->limit_raq1 != -1)
+			var->modR1 = 1;
+		else
+			var->modR1 = 0;
+			
+	var->posjugx1 += var->modR1;
+	var->posfinaljugx1 += var->modR1;
+	//fill_raqueta1(var);
+	delete_raqueta1(var);
+//Raqueta Jugador 2
 
-		//Raqueta del jugador 1
-		if (key1 = getch())
-		{
-			if (key1 == 'w' && var->limit_raq1 != 1)
-				var->modR1 = -1;
-			else if (key1 == 's' && var->limit_raq1 != -1)
-				var->modR1 = 1;
-			else
-				var->modR1 = 0;
-		}
-		var->posjugx1 += var->modR1;
-		var->posfinaljugx1 += var->modR1;
-		//fill_raqueta1(var);
-		delete_raqueta1(var);
-	}
-		//Raqueta Jugador 2
-			if (!cbreak())
-		{
-			if (key2 = getch())
-			{
-				if (key2 == 'o' && var->limit_raq2 != 1)
-					var->modR2 = -1;
-				else if (key2 == 'l' && var->limit_raq2 != -1)
-					var->modR2 = 1;
-				else
-					var->modR2 = 0;
-			}
-			var->posjugx2 += var->modR2;
-			var->posfinaljugx2 += var->modR2;
-			//fill_raqueta2(var);
-			delete_raqueta2(var);
-		}
-	}
-
+		if (key == 'o' && var->limit_raq2 != 1)
+			var->modR2 = -1;
+		else if (key == 'l' && var->limit_raq2 != -1)
+			var->modR2 = 1;
+		else
+			var->modR2 = 0;
+			
+	var->posjugx2 += var->modR2;
+	var->posfinaljugx2 += var->modR2;
+	//fill_raqueta2(var);
+	delete_raqueta2(var);
+	
+}
 
 void gameloop(pong *var)
 {
