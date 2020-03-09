@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 20:06:41 by miguel            #+#    #+#             */
-/*   Updated: 2020/03/09 18:55:47 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/09 19:45:19 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void delete_raqueta1(pong *var)
 		while (i < var->posfinaljugy1)
 		{
 			mvwprintw(win, var->posjugx1 - var->modR1, i, " ");
-			//var->campo[var->posjugx1 - var->modR1][i] = ' ';
 			i++;
 		}
 	}
@@ -65,7 +64,10 @@ void limits(pong *var)
 {
 	//modificar direccion si toca las bandas
 	if (var->pelx == 1 || var->pelx == V - 2)
+	{
 		var->modX *= -1;
+		beep();
+	}
 	//Subir gol si llega los costados
 	if (var->pely == 1 || var->pely == H - 2)
 	{
@@ -78,14 +80,22 @@ void limits(pong *var)
 			var->gol.player2++;
 		}
 		mvwprintw(win, var->pelx, var->pely, " ");
+		flash();
 		var->pelx = V / 2;
 		var->pely = H / 2;
+		random_mod(var);
 	}
 	//Cambiar direccion si choca contra raqueta
 	if (var->pelx >= var->posjugx1 && var->pelx <= var->posfinaljugx1 && var->pely >= var->posjugy1 && var->pely <= var->posfinaljugy1)
+	{
 		var->modY *= -1;
+		beep();
+	}
 	if (var->pelx >= var->posjugx2 && var->pelx <= var->posfinaljugx2 && var->pely >= var->posjugy2 && var->pely <= var->posfinaljugy2)
+	{
 		var->modY *= -1;
+		beep();
+	}
 	//Limitar principio y fin de raqueta1
 	if (var->posjugx1 <= 1)
 		var->limit_raq1 = 1;
@@ -138,9 +148,16 @@ void update(pong *var)
 	delete_raqueta2(var);
 }
 
+int winner(pong *var)
+{
+	if (var->gol.player1 == (points / 2) + 1 || var->gol.player2 == (points / 2) + 1)
+			exit_game();
+	return (1);
+}
+
 void gameloop(pong *var)
 {
-	while ((var->gol.player1 + var->gol.player2) < 7)
+	while (winner(var))
 	{
 		//wclear(win);
 		limits(var);

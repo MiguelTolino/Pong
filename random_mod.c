@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_window.c                                      :+:      :+:    :+:   */
+/*   random_mod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/06 17:48:25 by miguel            #+#    #+#             */
-/*   Updated: 2020/03/09 19:20:13 by miguel           ###   ########.fr       */
+/*   Created: 2020/03/09 19:42:31 by miguel            #+#    #+#             */
+/*   Updated: 2020/03/09 19:43:25 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pong.h"
 
-int init_window()
+void random_mod(pong *var)
 {
-    nodelay(stdscr, true);
-    curs_set(0);
-    clear();
-    win = newwin(V, H, 10, 10);
-    wbkgd(win, COLOR_PAIR(2));
-    refresh();
-    return (1);
+    srand(time(NULL));
+    int random1 = rand() % 2;
+    int random2 = rand() % 2;
+    if (random1 == 0)
+    {
+        var->modX = -1;
+    }
+    else
+    {
+        var->modX = 1;
+    }
+    if (random2 == 0)
+    {
+        var->modY = -1;
+    }
+    else
+    {
+        var->modY = 1;
+    }
 }

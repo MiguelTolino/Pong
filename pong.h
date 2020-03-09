@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 19:14:42 by miguel            #+#    #+#             */
-/*   Updated: 2020/03/09 18:52:35 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/09 19:43:40 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <time.h>
 #define V 20
 #define H 80
+#define points 7
 
 WINDOW *win;
 
@@ -48,5 +49,7 @@ int init_window();
 void gameloop(pong *var);
 void print_game(pong *var);
 void menu();
+void random_mod(pong *var);
+void exit_game();
 
 #endif

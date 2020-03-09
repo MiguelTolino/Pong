@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 19:09:15 by miguel            #+#    #+#             */
-/*   Updated: 2020/03/09 18:53:52 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/09 19:44:56 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int main()
     var.gol.player2 = 0;
 
     //MODIFICACION
-    var.modX = -1;
-    var.modY = -1;
+	random_mod(&var);
+    
 
     initscr();
     noecho();
@@ -42,8 +42,6 @@ int main()
     init_window();
     print_game(&var);
     gameloop(&var);
-    nodelay(stdscr, 0);
-    getch();
-    endwin();
+    exit_game();
     return (0);
 }
