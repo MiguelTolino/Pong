@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 19:14:42 by miguel            #+#    #+#             */
-/*   Updated: 2020/03/06 18:17:12 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/09 18:52:35 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <curses.h>
+#include <ncurses.h>
 #include <time.h>
 #define V 20
 #define H 80
 
 WINDOW *win;
+
+typedef struct gol
+{
+    int player1,player2;
+
+} goal;
 
 typedef struct pong
 {
@@ -33,11 +40,13 @@ typedef struct pong
     int posjugy2;
     int posfinaljugx2, posfinaljugy2;
     int modX, modY, modR1,modR2, limit_raq1, limit_raq2;
-    int gol;
+    goal gol;
 } pong;
+
 
 int init_window();
 void gameloop(pong *var);
 void print_game(pong *var);
+void menu();
 
 #endif

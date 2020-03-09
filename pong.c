@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 19:09:15 by miguel            #+#    #+#             */
-/*   Updated: 2020/03/06 18:15:52 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/09 18:53:52 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main()
 {
     pong var;
-    
+
     //POSICION
     var.pelx = V / 2;
     var.pely = H / 2;
@@ -27,14 +27,22 @@ int main()
     var.posjugy2 = H - 4;
     var.posfinaljugx2 = 13;
     var.posfinaljugy2 = H - 2;
+    var.gol.player1 = 0;
+    var.gol.player2 = 0;
 
     //MODIFICACION
     var.modX = -1;
     var.modY = -1;
 
+    initscr();
+    noecho();
+    keypad(stdscr, TRUE);
+
+    menu();
     init_window();
     print_game(&var);
     gameloop(&var);
+    nodelay(stdscr, 0);
     getch();
     endwin();
     return (0);
