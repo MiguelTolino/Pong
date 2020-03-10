@@ -32,6 +32,7 @@ void exit_game()
     mvprintw(1,0, "PRESS ANY KEY TO EXIT");
     attroff(A_BOLD | A_REVERSE);
     getch();
+    sleep(2);
     endwin();
     exit(1);
 }
