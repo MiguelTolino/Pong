@@ -2,6 +2,6 @@ CC = gcc
 CFLAGS = -g -o 
 CURSES = -lncurses
 NAME = pong
-FILES = *.c
+FILES = srcs/*.c
 main:
 	$(CC) $(FILES) $(CURSES) $(CFLAGS) $(NAME)

@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 20:06:41 by miguel            #+#    #+#             */
-/*   Updated: 2020/03/09 19:45:19 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/10 00:50:01 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void delete_raqueta2(pong *var)
 
 void limits(pong *var)
 {
+	int next_ball;
+
+	next_ball = 0;
 	//modificar direccion si toca las bandas
 	if (var->pelx == 1 || var->pelx == V - 2)
 	{
@@ -73,17 +76,19 @@ void limits(pong *var)
 	{
 		if (var->pely == 1)
 		{
-			var->gol.player1++;
+			var->gol.player2++;
+			next_ball = 2;
 		}
 		else
 		{
-			var->gol.player2++;
+			var->gol.player1++;
+			next_ball = 1;
 		}
 		mvwprintw(win, var->pelx, var->pely, " ");
 		flash();
 		var->pelx = V / 2;
 		var->pely = H / 2;
-		random_mod(var);
+		next_ball_dir(var, next_ball);
 	}
 	//Cambiar direccion si choca contra raqueta
 	if (var->pelx >= var->posjugx1 && var->pelx <= var->posfinaljugx1 && var->pely >= var->posjugy1 && var->pely <= var->posfinaljugy1)
@@ -151,7 +156,7 @@ void update(pong *var)
 int winner(pong *var)
 {
 	if (var->gol.player1 == (points / 2) + 1 || var->gol.player2 == (points / 2) + 1)
-			exit_game();
+			return(0);
 	return (1);
 }
 
@@ -165,4 +170,5 @@ void gameloop(pong *var)
 		print_game(var);
 		usleep(50000);
 	}
+	who_win(var);
 }

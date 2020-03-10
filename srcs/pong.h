@@ -6,7 +6,7 @@
 /*   By: miguel <miguel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 19:14:42 by miguel            #+#    #+#             */
-/*   Updated: 2020/03/09 19:43:40 by miguel           ###   ########.fr       */
+/*   Updated: 2020/03/10 00:50:16 by miguel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ void gameloop(pong *var);
 void print_game(pong *var);
 void menu();
 void random_mod(pong *var);
+void next_ball_dir(pong *var, int next_ball);
 void exit_game();
+void who_win(pong *var);
+
 
 #endif
