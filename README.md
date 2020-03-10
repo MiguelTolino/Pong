@@ -23,4 +23,4 @@ Player 2: * Upwards Arrow -> UP
 	  * Downwards Arrow -> DOWN
 
 
-![PONG](/home/miguel/Imágenes/pong.png)
+![Pong](/home/miguel/Imágenes/pong.png)
