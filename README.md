@@ -16,8 +16,8 @@ You have to score at least 4 goals to win the match.
 
 Press the following keys to move your racket up and down
 
-Player 1: * W -> UP
-	  * S -> DOWN
+Player 1: *W -> UP
+	  *S -> DOWN
 
-Player 2: * Upwards Arrow -> UP
-	  * Downwards Arrow -> DOWN
+Player 2: *Upwards Arrow -> UP
+	  *Downwards Arrow -> DOWN
